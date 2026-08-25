@@ -11,6 +11,17 @@ const getAllMovieVillains = () => {
     });
 };
 
+const getMovieVillainById = (id) => {
+  return client.query('SELECT * FROM movie_villains WHERE id = $1;', [id]) // also sanitizes the input
+    .then((result) => {
+        const rows = result.rows;
+        const record = rows[0];
+        console.log(record);
+        return record;
+    });
+};
+
 module.exports = {
-  getAllMovieVillains
+  getAllMovieVillains,
+  getMovieVillainById
 };
