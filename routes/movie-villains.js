@@ -3,7 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 // Import database query function to fetch all movie villains from the db.
-const { getAllMovieVillains, getMovieVillainById } = require('../db/queries/movie-villains');
+const { getAllMovieVillains,
+  getMovieVillainById,
+  updateMovieVillainById
+} = require('../db/queries/movie-villains');
 
 // INDEX - Browse all movie villains.
 // Handles GET requests to the root of the movie-villains route (/movie-villains)
@@ -24,6 +27,33 @@ router.get('/:id', (req, res) => {
   getMovieVillainById(id).then((movieVillain) => {
     const templateVar = { movieVillain };
     res.render('movie-villains/show', templateVar);
+  });
+});
+
+// Edit - Display form to edit a movie villain.
+router.get('/:id/edit', (req, res) => {
+  // Extract the villain id from the URL parameters.
+  const id = req.params.id;
+  // Retrieve villain details to populate the edit form
+  getMovieVillainById(id).then((movieVillain) => {
+    // Package the villain data into an object for the view template.
+    const templateVar = { movieVillain };
+    
+    // Render the edit view template containing the form.
+    res.render('movie-villains/edit', templateVar);
+  });
+});
+
+// UPDATE - Update a movie villain.
+router.put('/:id', (req, res) => {
+  // Extract the villain id from the URL parameters
+  const id = req.params.id;
+  // Destructure name and movie fields from the submitted form body.
+  const { name, movie } = req.body;
+  // Call database function to update the villain and return the updated record.
+  updateMovieVillainById(id, name, movie).then((movieVillain) => {
+    // Redirect the user back to the updated villain's detail page.
+    res.redirect(`/movie-villains/${movieVillain.id}`);
   });
 });
 
