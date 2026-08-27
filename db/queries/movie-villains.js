@@ -21,7 +21,24 @@ const getMovieVillainById = (id) => {
     });
 };
 
+// Update movie villain by Id
+const updateMovieVillainById = (id, name, movie) => {
+  return client.query(
+    // Execute the update query. 
+    // - Parameters ($1, $2, $3) prevent SQL injection.
+    // - RETURNING * sends back the newly updated row immediately.
+    'UPDATE movie_villains SET name = $1, movie = $2 WHERE id =$3 RETURNING *;', 
+    [name, movie, id] 
+  )
+    .then((results) => {
+      console.log('Villain updated!');
+      // Return only the 1st row of the updated record from the query result.
+      return results.rows[0];
+    });
+};
+
 module.exports = {
   getAllMovieVillains,
-  getMovieVillainById
+  getMovieVillainById,
+  updateMovieVillainById
 };
