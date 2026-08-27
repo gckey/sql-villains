@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Movie Villain</title>
+</head>
+<body>
+  <h1>Edit Movie Villain</h1>
+  <form action="/movie-villains/<%= movieVillain.id %>?_method=PUT" method="POST">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="<%= movieVillain.name %>" required>
+    </div>
+    <div>
+      <label for="Movie">Movie</label>
+      <input type="text" id="movie" name="movie" value="<%= movieVillain.movie %>" required>
+    </div>
+    <button type="submit">Update Villain</button>
+  </form>
+  <br>
+  <a href="/movie-villains/<%= movieVillain.id %>">Cancel</a>
+</body>
+</html>
