@@ -1,6 +1,7 @@
 // Third party modules.
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 // Initialize Express app and set port.
 const app = express();
@@ -10,6 +11,12 @@ app.set('view engine', 'ejs'); // Configure EJS as the template engine.
 
 // Middleware - HTTP request logger
 app.use(morgan('dev'));
+
+// Miiddleware - Parse URL-encoded bodies (form data)
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware - Override HTTP methods (for PUT/DELETE from forms)
+app.use(methodOverride('_method'));
 
 // Listener
 app.listen(PORT, () => console.log(
