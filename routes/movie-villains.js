@@ -3,10 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 // Import database query function to fetch all movie villains from the db.
-const { getAllMovieVillains,
+const {
+  getAllMovieVillains,
   getMovieVillainById,
+  createMovieVillain,
   updateMovieVillainById,
-  deleteMovieVillainById
+  deleteMovieVillainById,
+  
 } = require('../db/queries/movie-villains');
 
 // INDEX - Browse all movie villains.
@@ -19,6 +22,23 @@ router.get('/', (req, res) => {
 
     // Render the index view template located at views/movie-villains/index.ejs
     res.render('movie-villains/index', templateVar);
+  });
+});
+
+// NEW - Display form to create a new movie villain.
+router.get('/new', (req, res) => {
+  // Render the new villain form template.
+  res.render('movie-villains/new');
+});
+
+// CREATE - Create a new movie villain.
+router.post('/', (req, res) => {
+  // Destructure the name and movie fields from the incoming from submission body.
+  const { name, movie } = req.body;
+  // Call the database function to insert the new villain and wait for the promise to resolve.
+  createMovieVillain(name, movie).then((movieVillain) => {
+    // Redirect the user to the newly created villain's detail page using their returned Id.
+    res.redirect(`/movie-villains/${movieVillain.id}`);
   });
 });
 
