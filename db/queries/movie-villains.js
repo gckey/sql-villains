@@ -14,21 +14,21 @@ const getAllMovieVillains = () => {
 const getMovieVillainById = (id) => {
   return client.query('SELECT * FROM movie_villains WHERE id = $1;', [id]) // also sanitizes the input
     .then((result) => {
-        const rows = result.rows;
-        const record = rows[0];
-        console.log(record);
-        return record;
+      const rows = result.rows;
+      const record = rows[0];
+      console.log(record);
+      return record;
     });
 };
 
 // Update movie villain by Id
 const updateMovieVillainById = (id, name, movie) => {
   return client.query(
-    // Execute the update query. 
+    // Execute the update query.
     // - Parameters ($1, $2, $3) prevent SQL injection.
     // - RETURNING * sends back the newly updated row immediately.
-    'UPDATE movie_villains SET name = $1, movie = $2 WHERE id =$3 RETURNING *;', 
-    [name, movie, id] 
+    'UPDATE movie_villains SET name = $1, movie = $2 WHERE id =$3 RETURNING *;',
+    [name, movie, id]
   )
     .then((results) => {
       console.log('Villain updated!');
@@ -49,9 +49,27 @@ const deleteMovieVillainById = (id) => {
     });
 };
 
+// Create new movie villain.
+const createMovieVillain = (name, movie) => {
+  /* Run the insert query with parameterized values ($1, $2)
+     to prevent SQL injection, returning the new row.
+  */
+  return client.query(
+    'INSERT INTO movie_villains(name, movie) VALUES($1, $2) RETURNING *;',
+    [name, movie]
+  )
+    // Wait for the query promise to resolve with the db results object.
+    .then((results) => {
+      console.log(('A new villain is added'));
+      // Return only the 1st row of the newly created record from the query result.
+      return results.rows[0];
+    });
+};
+
 module.exports = {
   getAllMovieVillains,
   getMovieVillainById,
   updateMovieVillainById,
-  deleteMovieVillainById
+  deleteMovieVillainById,
+  createMovieVillain
 };
