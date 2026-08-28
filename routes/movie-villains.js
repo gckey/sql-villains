@@ -5,7 +5,8 @@ const router = express.Router();
 // Import database query function to fetch all movie villains from the db.
 const { getAllMovieVillains,
   getMovieVillainById,
-  updateMovieVillainById
+  updateMovieVillainById,
+  deleteMovieVillainById
 } = require('../db/queries/movie-villains');
 
 // INDEX - Browse all movie villains.
@@ -38,7 +39,7 @@ router.get('/:id/edit', (req, res) => {
   getMovieVillainById(id).then((movieVillain) => {
     // Package the villain data into an object for the view template.
     const templateVar = { movieVillain };
-    
+
     // Render the edit view template containing the form.
     res.render('movie-villains/edit', templateVar);
   });
@@ -54,6 +55,17 @@ router.put('/:id', (req, res) => {
   updateMovieVillainById(id, name, movie).then((movieVillain) => {
     // Redirect the user back to the updated villain's detail page.
     res.redirect(`/movie-villains/${movieVillain.id}`);
+  });
+});
+
+// DELETE - Delete a movie villain.
+router.delete('/:id', (req, res) => {
+  // Get the Id from the route parameters.
+  const id = req.params.id;
+  // Call the database function to delete the villain by their Id.
+  deleteMovieVillainById(id).then(() => {
+    // Send the user back to the main list page after deletion.
+    res.redirect('/movie-villains');
   });
 });
 
