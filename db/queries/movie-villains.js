@@ -37,8 +37,21 @@ const updateMovieVillainById = (id, name, movie) => {
     });
 };
 
+// Delete movie villain.
+const deleteMovieVillainById = (id) => {
+  // Run the delete query with the provided Id and return the removed row
+  return client.query('DELETE FROM movie_villains WHERE id = $1 RETURNING *;', [id])
+    // Wait for the query promise to resolve with the database results object.
+    .then((results) => {
+      console.log('Villain deleted');
+      // Return the first row (the deleted record) from the query result set.
+      return results.rows[0];
+    });
+};
+
 module.exports = {
   getAllMovieVillains,
   getMovieVillainById,
-  updateMovieVillainById
+  updateMovieVillainById,
+  deleteMovieVillainById
 };
