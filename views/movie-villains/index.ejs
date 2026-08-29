@@ -9,9 +9,11 @@
 
 <body>
   <h1>Movie Villains Index</h1>
+  <a href="/movie-villains/new">Create New Villain</a>
   <ul>
     <% for(const movieVillain of movieVillains) { %>
       <li>
+        <a href="/movie-villains/<%= movieVillain.id %>">
         <dl>
           <dt>ID</dt>
           <dd>
@@ -26,6 +28,7 @@
             <%= movieVillain.movie %>
           </dd>
         </dl>
+       </a>
       </li>
       <% } %>
   </ul>
