@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Movie Villain</title>
+</head>
+<body>
+  <h1>Create New Movie Villain</h1>
+  <form action="/movie-villains" method="POST">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="movie">Movie:</label>
+      <input type="text" id="movie" name="movie" required>
+    </div>
+    <button type="submit">Create Villain</button>
+  </form>
+  <a href="/movie-villains">Back to all villains</a>
+</body>
+
+</html>
