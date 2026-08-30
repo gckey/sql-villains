@@ -18,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware - Override HTTP methods (for PUT/DELETE from forms)
 app.use(methodOverride('_method'));
 
+// Middleware - Serve static files
+app.use(express.static('public'));
+
 // Listener
 app.listen(PORT, () => console.log(
   'Server running on port', PORT
