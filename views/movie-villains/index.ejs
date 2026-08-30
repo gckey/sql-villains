@@ -5,33 +5,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Villains Index</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <h1>Movie Villains Index</h1>
-  <a href="/movie-villains/new">Create New Villain</a>
-  <ul>
-    <% for(const movieVillain of movieVillains) { %>
-      <li>
-        <a href="/movie-villains/<%= movieVillain.id %>">
-        <dl>
-          <dt>ID</dt>
-          <dd>
-            <%= movieVillain.id %>
-          </dd>
-          <dt>Name</dt>
-          <dd>
-            <%= movieVillain.name %>
-          </dd>
-          <dt>Movie</dt>
-          <dd>
-            <%= movieVillain.movie %>
-          </dd>
-        </dl>
-       </a>
-      </li>
-      <% } %>
-  </ul>
+  <main class="container">
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>Movie Villains Index</h1>
+      </div>
+      <div class="page-actions">
+        <a href="/movie-villains/new" class="btn btn-primary">Create New Villain</a>
+      </div>
+    </header>
+
+    <% if (movieVillains && movieVillains.length> 0) { %>
+      <ul class="villains-list">
+        <% movieVillains.forEach((movieVillain, index)=> { %>
+          <li>
+            <a href="/movie-villains/<%= movieVillain.id %>" class="villain-card"
+              style="animation-delay: <%= index *50 %>ms">
+              <div class="villain-id">
+                <%= movieVillain.id %>
+              </div>
+              <div class="villain-info">
+                <div class="villain-name">
+                  <%= movieVillain.name %>
+                </div>
+                <div class="villain-movie">
+                  <%= movieVillain.movie %>
+                </div>
+              </div>
+              <svg class="villain-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </li>
+          <% }) %>
+      </ul>
+      <% } else { %>
+        <div class="card empty-state">
+          <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-lineca
+            p="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <h2 class="empty-title">No Villains Yet</h2>
+          <p class="empty-description">Start your collection by adding your first movie villain.</p>
+          <a href="/movie-villains/new" class="btn btn-primary">Create Your First Villain</a>
+        </div>
+        <% } %>
+
+          <footer class="page-footer">
+            <p>Movie Villains Collection — Built with Node.js, Express & PostgreSQL</p>
+          </footer>
+  </main>
 </body>
 
 </html>
