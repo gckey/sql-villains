@@ -26,10 +26,10 @@ The project relies on the following npm packages:
 
 Open your browser and navigate to:
 
-All Villains API: http://localhost:3000/villains/
+All Villains API: http://localhost:8080/movie-villains/
 
 Single Villain API: 
-http://localhost:3000/villains/1
+http://localhost:8080/movie-villains/1
 
 ----
 ## Backend routes express
