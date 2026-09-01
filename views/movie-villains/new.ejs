@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Movie Villain</title>
+  <title>Create New Movie Villain</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-  <h1>Create New Movie Villain</h1>
-  <form action="/movie-villains" method="POST">
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-      <label for="movie">Movie:</label>
-      <input type="text" id="movie" name="movie" required>
-    </div>
-    <button type="submit">Create Villain</button>
-  </form>
-  <a href="/movie-villains">Back to all villains</a>
+  <main class="container">
+    <header class="page-header">
+      <div class="page-title-group">
+        <a href="/movie-villains" class="link" style="margin-bottom: var(--space-2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" str oke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to All Villains
+        </a>
+        <h1>Create New Villain</h1>
+      </div>
+    </header>
+
+    <article class="card form-card">
+      <header class="form-header">
+        <h2 class="form-title">Add a Movie Villain</h2>
+        <p class="form-subtitle">Fill in the details below to add a new villain to your collection.</p>
+      </header>
+
+      <form action="/movie-villains" method="POST">
+        <div class="form-group">
+          <label for="name" class="form-label">Villain Name</label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="e.g., Darth
+Vader" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="movie" class="form-label">Movie</label>
+          <input type="text" id="movie" name="movie" class="form-input" placeholder="e.g., Star
+ Wars: Episode IV" required>
+        </div>
+
+        <div class="form-actions">
+          <a href="/movie-villains" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Create Villain</button>
+        </div>
+      </form>
+    </article>
+
+    <footer class="page-footer">
+      <p>Movie Villains Collection — Built with Node.js, Express & PostgreSQL</p>
+    </footer>
+  </main>
 </body>
 
 </html>
