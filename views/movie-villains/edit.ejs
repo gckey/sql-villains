@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Movie Villain</title>
+  <title>Edit <%= movieVillain.name %> - Movie Villains</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-  <h1>Edit Movie Villain</h1>
-  <form action="/movie-villains/<%= movieVillain.id %>?_method=PUT" method="POST">
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" value="<%= movieVillain.name %>" required>
-    </div>
-    <div>
-      <label for="Movie">Movie</label>
-      <input type="text" id="movie" name="movie" value="<%= movieVillain.movie %>" required>
-    </div>
-    <button type="submit">Update Villain</button>
-  </form>
-  <br>
-  <a href="/movie-villains/<%= movieVillain.id %>">Cancel</a>
+  <main class="container">
+    <header class="page-header">
+      <div class="page-title-group">
+        <a href="/movie-villains/<%= movieVillain.id %>" class="link" style="margin-bottom: var(--space-2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" str oke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to <%= movieVillain.name %>
+        </a>
+        <h1>Edit Villain</h1>
+      </div>
+    </header>
+
+    <article class="card form-card">
+      <header class="form-header">
+        <h2 class="form-title">Edit <%= movieVillain.name %>
+        </h2>
+        <p class="form-subtitle">Update the details below.</p>
+      </header>
+
+      <form action="/movie-villains/<%= movieVillain.id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="name" class="form-label">Villain Name</label>
+          <input type="text" id="name" name="name" class="form-input" value="<%= movieVillain.name %>" required
+            autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="movie" class="form-label">Movie</label>
+          <input type="text" id="movie" name="movie" class="form-input" value="<%= movieVillain.movie %>" required>
+        </div>
+
+        <div class="form-actions">
+          <a href="/movie-villains/<%= movieVillain.id %>" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Update Villain</button>
+        </div>
+      </form>
+    </article>
+
+    <footer class="page-footer">
+      <p>Movie Villains Collection — Built with Node.js, Express & PostgreSQL</p>
+    </footer>
+  </main>
 </body>
+
 </html>
